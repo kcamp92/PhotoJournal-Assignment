@@ -14,6 +14,7 @@
 		0BC6DD90234D051700CA0D49 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0BC6DD8F234D051700CA0D49 /* Assets.xcassets */; };
 		0BC6DD93234D051700CA0D49 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0BC6DD91234D051700CA0D49 /* LaunchScreen.storyboard */; };
 		0BC6DD9E234D051700CA0D49 /* Pursuit_Core_iOS_PhotoJournal_AssignmentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BC6DD9D234D051700CA0D49 /* Pursuit_Core_iOS_PhotoJournal_AssignmentTests.swift */; };
+		0BC6DDA9234D201F00CA0D49 /* AddPhotoJournalEntryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BC6DDA8234D201F00CA0D49 /* AddPhotoJournalEntryVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +39,7 @@
 		0BC6DD99234D051700CA0D49 /* Pursuit-Core-iOS-PhotoJournal-AssignmentTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Pursuit-Core-iOS-PhotoJournal-AssignmentTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0BC6DD9D234D051700CA0D49 /* Pursuit_Core_iOS_PhotoJournal_AssignmentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pursuit_Core_iOS_PhotoJournal_AssignmentTests.swift; sourceTree = "<group>"; };
 		0BC6DD9F234D051700CA0D49 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0BC6DDA8234D201F00CA0D49 /* AddPhotoJournalEntryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPhotoJournalEntryVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +85,7 @@
 				0BC6DD88234D051500CA0D49 /* SceneDelegate.swift */,
 				0BC6DD8A234D051500CA0D49 /* ViewController.swift */,
 				0BC6DD8C234D051500CA0D49 /* Main.storyboard */,
+				0BC6DDA8234D201F00CA0D49 /* AddPhotoJournalEntryVC.swift */,
 				0BC6DD8F234D051700CA0D49 /* Assets.xcassets */,
 				0BC6DD91234D051700CA0D49 /* LaunchScreen.storyboard */,
 				0BC6DD94234D051700CA0D49 /* Info.plist */,
@@ -200,6 +203,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0BC6DDA9234D201F00CA0D49 /* AddPhotoJournalEntryVC.swift in Sources */,
 				0BC6DD8B234D051500CA0D49 /* ViewController.swift in Sources */,
 				0BC6DD87234D051500CA0D49 /* AppDelegate.swift in Sources */,
 				0BC6DD89234D051500CA0D49 /* SceneDelegate.swift in Sources */,
