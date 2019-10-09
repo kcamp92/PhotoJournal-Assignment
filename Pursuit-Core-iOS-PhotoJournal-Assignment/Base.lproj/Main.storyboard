@@ -102,6 +102,9 @@
                         <barButtonItem key="rightBarButtonItem" title="Gear" image="gear" catalog="system" id="5Nv-1e-4pE"/>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="PhotosCollectionView" destination="Hpt-Lo-v0N" id="wpF-23-4TA"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -163,7 +166,11 @@
                                 <rect key="frame" x="0.0" y="755" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
-                                    <barButtonItem title="Photo Library" id="LQU-Fp-fmo"/>
+                                    <barButtonItem title="Photo Library" id="LQU-Fp-fmo">
+                                        <connections>
+                                            <action selector="photoLibraryPressed:" destination="msJ-e4-bjH" id="EBr-Kr-9VT"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="NAl-GF-nMz"/>
                                     <barButtonItem systemItem="camera" id="Jg6-vN-mn7">
                                         <connections>

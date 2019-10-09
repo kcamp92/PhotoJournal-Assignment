@@ -8,18 +8,23 @@
 
 import UIKit
 
-class PhotoJournalEntryViewController: UIViewController /*UICollectionViewDataSource*/{
-   
-//
-//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        return 1
-//
-//    }
-//
-//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        return cell
-//
-//    }
+class PhotoJournalEntryViewController: UIViewController, UICollectionViewDataSource{
+    
+    var photosDeets = [Photos]() {
+        didSet {
+            self.PhotosCollectionView.reloadData()
+        }
+    }
+    
+
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return photosDeets.count
+
+    }
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+       
+    }
 
 
     override func viewDidLoad() {
@@ -27,6 +32,7 @@ class PhotoJournalEntryViewController: UIViewController /*UICollectionViewDataSo
         // Do any additional setup after loading the view.
     }
     
+    @IBOutlet weak var PhotosCollectionView: UICollectionView!
     @IBAction func addButton(_ sender: UIBarButtonItem) {
         let storyBoard = UIStoryboard.init(name: "Main", bundle: nil)
         let AddPhotoVC = storyBoard.instantiateViewController(identifier: "AddPhotoJournalEntryVC") as! AddPhotoJournalEntryVC
@@ -62,18 +68,3 @@ extension PhotoJournalEntryViewController: ActionSheets {
 }
 
 
-/* let optionMenu = UIAlertController(title: nil, message: "Choose Option", preferredStyle: .actionSheet)
- 
- let addAction = UIAlertAction(title: "Add to favorites", style: .default) { (action) in
- let film = self.films[tag]
- try? FilmsPersistenceManager.manager.saveFilm(film: film)
- 
- }
- let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
- optionMenu.addAction(addAction)
- optionMenu.addAction(cancelAction)
- self.present(optionMenu, animated: true, completion: nil)
- 
- 
- }
- */

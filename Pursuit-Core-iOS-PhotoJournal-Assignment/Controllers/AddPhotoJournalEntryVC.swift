@@ -26,6 +26,7 @@ class AddPhotoJournalEntryVC: UIViewController,UINavigationControllerDelegate, U
     
     
     @IBAction func saveButtonPressed(_ sender: UIBarButtonItem) {
+   
     }
     
     @IBAction func cameraButtonPressed(_ sender: UIBarButtonItem) {
@@ -37,11 +38,20 @@ class AddPhotoJournalEntryVC: UIViewController,UINavigationControllerDelegate, U
         
     }
     
+    @IBAction func photoLibraryPressed(_ sender: UIBarButtonItem) {
+        imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        imagePicker.sourceType = .photoLibrary
+                  
+           present(imagePicker, animated: true, completion: nil)
+    }
+    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         imagePicker.dismiss(animated: true, completion: nil)
         imageViewOutlet.image = info[.originalImage] as? UIImage
         
     }
+    
     
     @IBAction func cancelButtonPressed(_ sender: UIBarButtonItem) {
         self.dismiss(animated: true, completion: nil)
