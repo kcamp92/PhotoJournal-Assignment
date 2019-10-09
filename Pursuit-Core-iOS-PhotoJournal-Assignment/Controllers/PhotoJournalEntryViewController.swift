@@ -69,7 +69,16 @@ extension PhotoJournalEntryViewController: ActionSheets {
             try? PhotosPersistenceManager.manager.deletePhotos(withID: photoSelected.creationDate)
         }
         let edit = UIAlertAction(title: "Edit", style: .default) { (action) in
-         //   let editPhoto = self.photoDeets[tag]
+            let AddPhotoVC = self.storyboard?.instantiateViewController(identifier: "AddPhotoJournalEntryVC") as! AddPhotoJournalEntryVC
+            AddPhotoVC.makeEdits = .edit
+            AddPhotoVC.tag = tag
+            AddPhotoVC.photoArray = self.photoDeets
+           
+            
+            AddPhotoVC.modalPresentationStyle = .currentContext
+            self.present(AddPhotoVC, animated: true, completion: nil)
+            
+            //let editPhoto = self.photoDeets[tag]
            // try? PhotosPersistenceManager.manager.//Write code to edit
             
             /*let photoSelected = self.photoDeets[tag]

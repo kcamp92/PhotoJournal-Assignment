@@ -29,4 +29,10 @@ struct PhotosPersistenceManager{
             try persistenceHelper.replace(elements: newPhotos)
         }
     }
+    
+    func replacePhotoArray(photoReplace: [Photos]) throws {
+          do {
+              try persistenceHelper.replace(elements: photoReplace)
+          }
+      }
 }

@@ -9,7 +9,13 @@
 import Foundation
 
 struct Photos: Codable {
-    let image: Data
-    let title: String
+    var image: Data
+    var title: String
     let creationDate: String
+}
+
+
+enum AddOrEdit {
+    case add
+    case edit
 }

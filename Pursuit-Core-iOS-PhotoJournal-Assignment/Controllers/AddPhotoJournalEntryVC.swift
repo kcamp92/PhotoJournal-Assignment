@@ -10,16 +10,24 @@ import UIKit
 
 class AddPhotoJournalEntryVC: UIViewController,UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
+    var makeEdits: AddOrEdit!
+    var tag = 0
+    var photoArray: [Photos]!
+    
     var imagePicker: UIImagePickerController!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         textViewOutlet.delegate = self
-
-        // Do any additional setup after loading the view.
+        switch makeEdits {
+        case .edit:
+            imageViewOutlet.image = UIImage(data: photoArray[tag].image)
+        default:
+            return
+        }
     }
     
-  // MARK: - IBOutlets
+    // MARK: - IBOutlets
     
     @IBOutlet weak var imageViewOutlet: UIImageView!
     
@@ -29,25 +37,40 @@ class AddPhotoJournalEntryVC: UIViewController,UINavigationControllerDelegate, U
     
     
     @IBAction func saveButtonPressed(_ sender: UIBarButtonItem) {
-        guard let imageData = imageViewOutlet.image?.jpegData(compressionQuality: 0.5)
-            else {
+        switch makeEdits {
+        case .add:
+            guard let imageData = imageViewOutlet.image?.jpegData(compressionQuality: 0.5)
+                else {
+                    return
+            }
+            guard let title = textViewOutlet.text else {
                 return
-        }
-        guard let title = textViewOutlet.text else {
-            return
-        }
-        let date = Date()
-        let formatter = DateFormatter()
-        formatter.dateStyle = .long
-        formatter.timeStyle = .medium
-        let createdDate = formatter.string(from: date)
-        
-        let photoInfo = Photos(image: imageData, title: title, creationDate: createdDate)
-        do { try PhotosPersistenceManager.manager.savePhoto(photo: photoInfo)
-            dismiss(animated: true, completion: nil)
+            }
+            let date = Date()
+            let formatter = DateFormatter()
+            formatter.dateStyle = .long
+            formatter.timeStyle = .medium
+            let createdDate = formatter.string(from: date)
             
-        }catch{
-            print(error)
+            let photoInfo = Photos(image: imageData, title: title, creationDate: createdDate)
+            do { try PhotosPersistenceManager.manager.savePhoto(photo: photoInfo)
+                dismiss(animated: true, completion: nil)
+                
+            }catch{
+                print(error)
+            }
+        case .edit:
+            var photoClicked = photoArray[tag]
+            photoClicked.title = textViewOutlet.text
+            photoClicked.image = (imageViewOutlet.image?.jpegData(compressionQuality: 0.5))!
+            photoArray.insert(photoClicked, at: tag)
+            
+            photoArray.remove(at: tag + 1 )
+           try? PhotosPersistenceManager.manager.replacePhotoArray(photoReplace: photoArray)
+            dismiss(animated: true, completion: nil)
+        default:
+            return
+            
         }
     }
     
@@ -64,8 +87,8 @@ class AddPhotoJournalEntryVC: UIViewController,UINavigationControllerDelegate, U
         imagePicker = UIImagePickerController()
         imagePicker.delegate = self
         imagePicker.sourceType = .photoLibrary
-                  
-           present(imagePicker, animated: true, completion: nil)
+        
+        present(imagePicker, animated: true, completion: nil)
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
