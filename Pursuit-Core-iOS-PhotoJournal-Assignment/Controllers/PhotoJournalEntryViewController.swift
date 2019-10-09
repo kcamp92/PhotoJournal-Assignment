@@ -37,14 +37,15 @@ class PhotoJournalEntryViewController: UIViewController, UICollectionViewDataSou
         cell.delegate = self
         return cell 
     }
-
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        loadData()
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         PhotosCollectionView.dataSource = self
         PhotosCollectionView.delegate = self
-        
-        loadData()
     }
     
     @IBOutlet weak var PhotosCollectionView: UICollectionView!
@@ -54,6 +55,14 @@ class PhotoJournalEntryViewController: UIViewController, UICollectionViewDataSou
         let AddPhotoVC = storyBoard.instantiateViewController(identifier: "AddPhotoJournalEntryVC") as! AddPhotoJournalEntryVC
         present(AddPhotoVC, animated: true, completion: nil)
         AddPhotoVC.modalPresentationStyle = .currentContext
+    }
+    
+    
+    @IBAction func settingsButtonPressed(_ sender: UIBarButtonItem) {
+        let storyBoard = UIStoryboard.init(name: "Main", bundle: nil)
+        let settingsVC = storyBoard.instantiateViewController(identifier: "SettingsViewController") as! SettingsViewController
+        present(settingsVC, animated: true, completion: nil)
+        settingsVC.modalPresentationStyle = .currentContext
     }
     
 }
@@ -73,27 +82,10 @@ extension PhotoJournalEntryViewController: ActionSheets {
             AddPhotoVC.makeEdits = .edit
             AddPhotoVC.tag = tag
             AddPhotoVC.photoArray = self.photoDeets
-           
-            
             AddPhotoVC.modalPresentationStyle = .currentContext
             self.present(AddPhotoVC, animated: true, completion: nil)
-            
-            //let editPhoto = self.photoDeets[tag]
-           // try? PhotosPersistenceManager.manager.//Write code to edit
-            
-            /*let photoSelected = self.photoDeets[tag]
-            self.photoDeets.remove(at: tag)
-            try? PhotosPersistenceManager.manager.deletePhotos(withID: photoSelected.creationDate)
-             
-              let storyBoard = UIStoryboard.init(name: "Main", bundle: nil)
-                     let AddPhotoVC = storyBoard.instantiateViewController(identifier: "AddPhotoJournalEntryVC") as! AddPhotoJournalEntryVC
-                     present(AddPhotoVC, animated: true, completion: nil)
-                     AddPhotoVC.modalPresentationStyle = .currentContext
-                 }
-                 
-             }
-             */
         }
+        
         let share = UIAlertAction(title: "Share", style: .default) { (action) in
             let image = UIImage(data: self.photoDeets[tag].image)
             let share = UIActivityViewController(activityItems: [image!], applicationActivities: [])
@@ -114,7 +106,9 @@ extension PhotoJournalEntryViewController: ActionSheets {
 
 extension PhotoJournalEntryViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        PhotosCollectionView.scroll
         return CGSize.init(width: 350, height: 350)
     }
+  
 }
 
