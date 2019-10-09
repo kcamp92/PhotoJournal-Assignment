@@ -63,15 +63,27 @@ extension PhotoJournalEntryViewController: ActionSheets {
     func actionSheet(tag: Int) {
         let actionSheet = UIAlertController(title: "Options", message: "Choose an Option", preferredStyle: .actionSheet)
         let delete = UIAlertAction(title: "Delete", style: .destructive) { (action) in
-         // let   UIAlertAction
+         // let UIAlertAction
             let photoSelected = self.photoDeets[tag]
             self.photoDeets.remove(at: tag)
             try? PhotosPersistenceManager.manager.deletePhotos(withID: photoSelected.creationDate)
-           
         }
         let edit = UIAlertAction(title: "Edit", style: .default) { (action) in
          //   let editPhoto = self.photoDeets[tag]
            // try? PhotosPersistenceManager.manager.//Write code to edit
+            
+            /*let photoSelected = self.photoDeets[tag]
+            self.photoDeets.remove(at: tag)
+            try? PhotosPersistenceManager.manager.deletePhotos(withID: photoSelected.creationDate)
+             
+              let storyBoard = UIStoryboard.init(name: "Main", bundle: nil)
+                     let AddPhotoVC = storyBoard.instantiateViewController(identifier: "AddPhotoJournalEntryVC") as! AddPhotoJournalEntryVC
+                     present(AddPhotoVC, animated: true, completion: nil)
+                     AddPhotoVC.modalPresentationStyle = .currentContext
+                 }
+                 
+             }
+             */
         }
         let share = UIAlertAction(title: "Share", style: .default) { (action) in
             let image = UIImage(data: self.photoDeets[tag].image)
