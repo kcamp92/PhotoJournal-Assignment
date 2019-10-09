@@ -110,10 +110,10 @@
             </objects>
             <point key="canvasLocation" x="1957.9710144927537" y="118.52678571428571"/>
         </scene>
-        <!--View Controller-->
+        <!--Settings View Controller-->
         <scene sceneID="dbf-e9-T7M">
             <objects>
-                <viewController id="LEN-YJ-Nlb" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SettingsViewController" id="LEN-YJ-Nlb" customClass="SettingsViewController" customModule="Pursuit_Core_iOS_PhotoJournal_Assignment" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hty-aj-FNm">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -187,6 +187,7 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="imageViewOutlet" destination="xYq-bD-UpJ" id="Y1t-xS-8F9"/>
+                        <outlet property="textViewOutlet" destination="ZRZ-WK-dOe" id="9T4-pE-Zhs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PQE-h4-OSX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

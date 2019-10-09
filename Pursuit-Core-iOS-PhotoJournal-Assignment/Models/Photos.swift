@@ -11,4 +11,5 @@ import Foundation
 struct Photos: Codable {
     let image: Data
     let title: String
+    let creationDate: String
 }

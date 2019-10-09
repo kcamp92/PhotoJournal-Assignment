@@ -15,24 +15,39 @@ class PhotoJournalEntryViewController: UIViewController, UICollectionViewDataSou
             self.PhotosCollectionView.reloadData()
         }
     }
-    
+    private func loadData(){
+        do {
+            try self.photosDeets = PhotosPersistenceManager.manager.getPhotos()
+        } catch {
+            print(error)
+        }
+    }
 
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return photosDeets.count
 
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-       
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "photoCell", for: indexPath) as! photoCell
+        let photoDetails = photosDeets[indexPath.row]
+        cell.DescriptionLabel.text = photoDetails.title
+        cell.DateLabel.text = photoDetails.creationDate
+        cell.photosImageView.image = UIImage(data: photoDetails.image)
+        return cell 
     }
 
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        PhotosCollectionView.dataSource = self
+        PhotosCollectionView.delegate = self
+        loadData()
+        //PhotosCollectionView.delegate = self
     }
     
     @IBOutlet weak var PhotosCollectionView: UICollectionView!
+    
     @IBAction func addButton(_ sender: UIBarButtonItem) {
         let storyBoard = UIStoryboard.init(name: "Main", bundle: nil)
         let AddPhotoVC = storyBoard.instantiateViewController(identifier: "AddPhotoJournalEntryVC") as! AddPhotoJournalEntryVC
@@ -67,4 +82,9 @@ extension PhotoJournalEntryViewController: ActionSheets {
     
 }
 
+extension PhotoJournalEntryViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize.init(width: 300, height: 300)
+    }
+}
 

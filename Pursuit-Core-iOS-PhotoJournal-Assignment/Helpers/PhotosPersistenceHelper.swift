@@ -22,4 +22,11 @@ struct PhotosPersistenceManager{
         return try persistenceHelper.getObjects()
     }
     
+    func deletePhotos(withID: String) throws {
+        do {
+            let photos = try getPhotos()
+            let newPhotos = photos.filter {$0.creationDate != withID}
+            try persistenceHelper.replace(elements: newPhotos)
+        }
+    }
 }
