@@ -10,6 +10,8 @@ import UIKit
 
 class PhotoJournalEntryViewController: UIViewController, UICollectionViewDataSource{
     
+    var isON: Bool!
+    
     var photoDeets = [Photos]() {
         didSet {
             self.PhotosCollectionView.reloadData()
@@ -34,6 +36,7 @@ class PhotoJournalEntryViewController: UIViewController, UICollectionViewDataSou
         cell.DescriptionLabel.text = photoDetails.title
         cell.DateLabel.text = photoDetails.creationDate
         cell.photosImageView.image = UIImage(data: photoDetails.image)
+       // cell.photosImageView.layer.cornerRadius = 150/3
         cell.delegate = self
         return cell 
     }
@@ -61,6 +64,8 @@ class PhotoJournalEntryViewController: UIViewController, UICollectionViewDataSou
     @IBAction func settingsButtonPressed(_ sender: UIBarButtonItem) {
         let storyBoard = UIStoryboard.init(name: "Main", bundle: nil)
         let settingsVC = storyBoard.instantiateViewController(identifier: "SettingsViewController") as! SettingsViewController
+        settingsVC.switchDelegate = self
+        settingsVC.isON = isON
         present(settingsVC, animated: true, completion: nil)
         settingsVC.modalPresentationStyle = .currentContext
     }
@@ -106,9 +111,38 @@ extension PhotoJournalEntryViewController: ActionSheets {
 
 extension PhotoJournalEntryViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        PhotosCollectionView.scroll
+       // PhotosCollectionView.scroll
         return CGSize.init(width: 350, height: 350)
     }
   
 }
 
+extension PhotoJournalEntryViewController: SwitchDelegate {
+    func isSwitched(userSender: UISwitch) {
+        switch userSender.isOn {
+        case true:
+            isON = true
+            self.PhotosCollectionView.backgroundColor = .white
+            print("hello")
+        case false:
+            isON = false
+            self.PhotosCollectionView.backgroundColor = .black
+            print("Goodbye")
+        }
+    }
+    
+    //        switch sender.isOn {
+    //        case true:
+    //            DarkModeLabel.text = "We are Not in Dark Mode"
+    //            //self.view.addSubview(collectionViews)
+    //
+    //           self.view.backgroundColor = .white
+    //            DarkModeLabel.textColor = .black
+    //        case false:
+    //            DarkModeLabel.text = "We are Not in Dark Mode"
+    //           // self.view.addSubview(collectionViews)
+    //            self.view.backgroundColor = .black
+    //            DarkModeLabel.textColor = .white
+    //        }
+    
+}
