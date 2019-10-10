@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol ActionSheets: AnyObject {
+protocol ActionSheetDelegate: AnyObject {
     func actionSheet(tag: Int)
 }
 
@@ -22,7 +22,7 @@ class photoCell: UICollectionViewCell {
     
     @IBOutlet weak var ActionSheetOutlet: UIButton!
     
-    weak var delegate:ActionSheets?
+    weak var delegate:ActionSheetDelegate?
     
     @IBAction func ActionSheet(_ sender: UIButton) {
         delegate?.actionSheet(tag: sender.tag)

@@ -10,8 +10,9 @@ import UIKit
 
 class PhotoJournalEntryViewController: UIViewController, UICollectionViewDataSource{
     
-    var isON: Bool!
-    
+    var isON = false
+    var backgroundColor = ""
+    var index = 0
     var photoDeets = [Photos]() {
         didSet {
             self.PhotosCollectionView.reloadData()
@@ -40,6 +41,19 @@ class PhotoJournalEntryViewController: UIViewController, UICollectionViewDataSou
         cell.delegate = self
         return cell 
     }
+    
+    func willRotateToInterfaceOrientation(direction: String) {
+    let layout = self.PhotosCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
+        switch index {
+        case 0:
+        layout.scrollDirection = UICollectionView.ScrollDirection.vertical
+        case 1:
+        layout.scrollDirection = UICollectionView.ScrollDirection.horizontal
+        default:
+            break
+        }
+              }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         loadData()
@@ -47,8 +61,18 @@ class PhotoJournalEntryViewController: UIViewController, UICollectionViewDataSou
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        backgroundColor = UserDefaults.standard.object(forKey: "DarkModeSetting") as? String ?? ""
         PhotosCollectionView.dataSource = self
         PhotosCollectionView.delegate = self
+        switch backgroundColor {
+        case "black":
+            PhotosCollectionView.backgroundColor = .black
+        case "white":
+            PhotosCollectionView.backgroundColor = .white
+        default:
+            break
+        }
+       
     }
     
     @IBOutlet weak var PhotosCollectionView: UICollectionView!
@@ -72,7 +96,7 @@ class PhotoJournalEntryViewController: UIViewController, UICollectionViewDataSou
     
 }
 
-extension PhotoJournalEntryViewController: ActionSheets {
+extension PhotoJournalEntryViewController: ActionSheetDelegate {
     //to create an action sheet, you need uialertcontrollers
     func actionSheet(tag: Int) {
         let actionSheet = UIAlertController(title: "Options", message: "Choose an Option", preferredStyle: .actionSheet)
@@ -118,31 +142,23 @@ extension PhotoJournalEntryViewController: UICollectionViewDelegateFlowLayout {
 }
 
 extension PhotoJournalEntryViewController: SwitchDelegate {
-    func isSwitched(userSender: UISwitch) {
+    func segmentedControlPressed(userSender: UISegmentedControl) {
+        index = userSender.selectedSegmentIndex
+    }
+
+
+    func switchPressed(userSender: UISwitch) {
         switch userSender.isOn {
         case true:
             isON = true
-            self.PhotosCollectionView.backgroundColor = .white
-            print("hello")
+            self.PhotosCollectionView.backgroundColor = .black
+            UserDefaults.standard.set("black", forKey:"DarkModeSetting" )
         case false:
             isON = false
-            self.PhotosCollectionView.backgroundColor = .black
-            print("Goodbye")
+            self.PhotosCollectionView.backgroundColor = .white
+            UserDefaults.standard.set("white", forKey:"DarkModeSetting" )
+            
         }
     }
-    
-    //        switch sender.isOn {
-    //        case true:
-    //            DarkModeLabel.text = "We are Not in Dark Mode"
-    //            //self.view.addSubview(collectionViews)
-    //
-    //           self.view.backgroundColor = .white
-    //            DarkModeLabel.textColor = .black
-    //        case false:
-    //            DarkModeLabel.text = "We are Not in Dark Mode"
-    //           // self.view.addSubview(collectionViews)
-    //            self.view.backgroundColor = .black
-    //            DarkModeLabel.textColor = .white
-    //        }
-    
+   
 }

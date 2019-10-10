@@ -130,23 +130,6 @@
                                 <color key="textColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dark Mode Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rI8-bP-RK6">
-                                <rect key="frame" x="0.0" y="265" width="414" height="18.5"/>
-                                <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1NH-ea-Yy7">
-                                <rect key="frame" x="0.0" y="88" width="414" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                <items>
-                                    <barButtonItem systemItem="cancel" id="W6F-2q-b1g">
-                                        <connections>
-                                            <action selector="CancelButton:" destination="LEN-YJ-Nlb" id="U70-QJ-7Tg"/>
-                                        </connections>
-                                    </barButtonItem>
-                                </items>
-                            </toolbar>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="1wl-Tp-BUv">
                                 <rect key="frame" x="66" y="553" width="283" height="31"/>
                                 <constraints>
@@ -163,12 +146,9 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="rI8-bP-RK6" firstAttribute="top" secondItem="IM8-kT-3QY" secondAttribute="bottom" constant="80" id="Cug-g7-yHm"/>
-                            <constraint firstItem="rI8-bP-RK6" firstAttribute="leading" secondItem="30h-2c-gxD" secondAttribute="leading" id="Nzn-Cq-i01"/>
                             <constraint firstItem="30h-2c-gxD" firstAttribute="trailing" secondItem="IM8-kT-3QY" secondAttribute="trailing" id="XMl-9X-LEp"/>
                             <constraint firstItem="1wl-Tp-BUv" firstAttribute="leading" secondItem="30h-2c-gxD" secondAttribute="leading" constant="142" id="ZyC-yt-jWg"/>
                             <constraint firstItem="IM8-kT-3QY" firstAttribute="top" secondItem="30h-2c-gxD" secondAttribute="top" constant="75" id="iAv-im-RUq"/>
-                            <constraint firstItem="30h-2c-gxD" firstAttribute="trailing" secondItem="rI8-bP-RK6" secondAttribute="trailing" id="jN2-ZA-IoJ"/>
                             <constraint firstItem="IM8-kT-3QY" firstAttribute="centerX" secondItem="1wl-Tp-BUv" secondAttribute="centerX" id="n14-Ct-0gM"/>
                             <constraint firstItem="30h-2c-gxD" firstAttribute="bottom" secondItem="1wl-Tp-BUv" secondAttribute="bottom" constant="279" id="qgM-JF-ZXE"/>
                             <constraint firstItem="IM8-kT-3QY" firstAttribute="leading" secondItem="30h-2c-gxD" secondAttribute="leading" id="zkL-oY-2aU"/>
@@ -177,7 +157,6 @@
                     </view>
                     <navigationItem key="navigationItem" id="FwQ-MC-Q1R"/>
                     <connections>
-                        <outlet property="DarkModeLabel" destination="rI8-bP-RK6" id="Y7o-AV-hei"/>
                         <outlet property="InstructionsLabel" destination="IM8-kT-3QY" id="yr2-VZ-fPP"/>
                         <outlet property="segmentedControlOutlet" destination="1wl-Tp-BUv" id="D3f-m3-eic"/>
                         <outlet property="switchOutlet" destination="lh1-dh-ldN" id="M7f-YT-Oyg"/>

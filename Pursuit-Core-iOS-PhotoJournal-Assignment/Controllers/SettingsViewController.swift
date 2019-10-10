@@ -9,45 +9,47 @@
 import UIKit
 
 protocol SwitchDelegate: AnyObject {
-    func isSwitched(userSender: UISwitch)
+    func switchPressed(userSender: UISwitch)
+    func segmentedControlPressed(userSender: UISegmentedControl)
 }
 
 class SettingsViewController: UIViewController {
     
-   var collectionViews: photoCell!
-    var isON:Bool!
-    
+// MARK: - Properties
     weak var switchDelegate: SwitchDelegate?
+    var isON = false
     
+// MARK: - IB Outlets
     @IBOutlet weak var switchOutlet: UISwitch!
     @IBOutlet weak var InstructionsLabel: UILabel!
-    
     @IBOutlet weak var segmentedControlOutlet: UISegmentedControl!
-    @IBOutlet weak var DarkModeLabel: UILabel!
+    
+    
+//MARK:- Lifecycle Methods
+    
+    override func viewDidLoad() {
+         super.viewDidLoad()
+        InstructionsLabel.text = "Press Switch To Turn Dark Mode On!"
+        
+     }
+     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        switch isON {
+        case true:
+            switchOutlet.isOn = true
+        case false:
+            switchOutlet.isOn = false 
+        }
+     }
     
     @IBAction func DarkModeSwitch(_ sender: UISwitch) {
-        switchDelegate?.isSwitched(userSender: sender)
-        dismiss(animated: true) {
-            sender.isOn = self.isON
-        }
-        //switch sender.isOn
-        
-//        switch sender.isOn {
-//        case true:
-//            DarkModeLabel.text = "We are Not in Dark Mode"
-//            //self.view.addSubview(collectionViews)
-//
-//           self.view.backgroundColor = .white
-//            DarkModeLabel.textColor = .black
-//        case false:
-//            DarkModeLabel.text = "We are Not in Dark Mode"
-//           // self.view.addSubview(collectionViews)
-//            self.view.backgroundColor = .black
-//            DarkModeLabel.textColor = .white
-//        }
+        switchDelegate?.switchPressed(userSender: sender)
+      dismiss(animated: true)
     }
     
+    
     @IBAction func scrollDirectionOrientation(_ sender: UISegmentedControl) {
+        switchDelegate?.segmentedControlPressed(userSender: sender)
       //  segmentedControlOutlet.
         
       
@@ -64,13 +66,7 @@ class SettingsViewController: UIViewController {
               }
           }
           */
-          
-    @IBAction func CancelButton(_ sender: UIBarButtonItem) {
-        self.dismiss(animated: true, completion: nil)
     }
     
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-}
+
